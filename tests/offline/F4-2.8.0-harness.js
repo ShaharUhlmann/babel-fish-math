@@ -299,7 +299,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     console.warn = ow;
     process.off('unhandledRejection', onUnhandled);
     readFails = false;
-    eq('M9 failed read: caught (a warning, no unhandled rejection)', [warns.some((w) => w.includes('rtl-math-mix')), unhandled], [true, 0]);
+    eq('M9 failed read: caught (a warning, no unhandled rejection)', [warns.some((w) => w.includes('babel-fish-math')), unhandled], [true, 0]);
 
     // sweep: only section containers
     const widget = document.createElement('div');

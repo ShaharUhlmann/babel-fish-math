@@ -2,7 +2,7 @@
 const { connectTo } = await import('./cdp2.mjs');
 const { setup, check, FILE } = await import('./lib.mjs');
 const h = await setup();
-const P = `app.plugins.plugins['rtl-math-mix']`;
+const P = `app.plugins.plugins['babel-fish-math']`;
 const E = `app.workspace.activeLeaf.view.editor`;
 const AD = `app.vault.adapter`;
 const DIR = `${P}.manifest.dir + '/maps/'`;
@@ -35,7 +35,7 @@ check('maps/qwerty.json was created', await exists('qwerty'), '');
 const f0 = JSON.parse(await readMap('qwerty'));
 check('default map content', f0.keys.a === 'ש' && f0.keys['('] === ')' && Object.keys(f0.keys).length === 37, f0.name + ' keys=' + Object.keys(f0.keys).length);
 console.log('settings:', await h.ev(`JSON.stringify(${P}.settings)`));
-check('command has no default hotkey', await h.ev(`!(app.commands.commands['rtl-math-mix:toggle-hebrew-typing'].hotkeys || []).length`), '');
+check('command has no default hotkey', await h.ev(`!(app.commands.commands['babel-fish-math:toggle-hebrew-typing'].hotkeys || []).length`), '');
 
 // ---- F12 in the main window
 await h.doc('שלום\n', 0, 0);
@@ -47,13 +47,13 @@ await h.send('Input.dispatchKeyEvent', { type: 'rawKeyDown', key: 'F12', code: '
 await h.send('Input.dispatchKeyEvent', { type: 'rawKeyDown', key: 'F12', code: 'F12', windowsVirtualKeyCode: 123, autoRepeat: true });
 await h.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'F12', code: 'F12', windowsVirtualKeyCode: 123 }); await h.sleep(200);
 check('holding F12 toggles once', (await layer()) === l0, `${await layer()}`);
-await h.ev(`app.commands.executeCommandById('rtl-math-mix:toggle-hebrew-typing')`); await h.sleep(200);
+await h.ev(`app.commands.executeCommandById('babel-fish-math:toggle-hebrew-typing')`); await h.sleep(200);
 check('the command toggles', (await layer()) === !l0, '');
 await h.ev(`${P}.settings.hebrew || ${P}.toggle()`); await h.sleep(200);
 check('Hebrew typing on for what follows', await layer(), '');
 
 // ---- Settings window
-await h.ev(`(async () => { app.setting.open(); app.setting.openTabById('rtl-math-mix'); })()`); await h.sleep(1500);
+await h.ev(`(async () => { app.setting.open(); app.setting.openTabById('babel-fish-math'); })()`); await h.sleep(1500);
 sw = await connectTo(new RegExp('^Settings - ' + process.env.OBSIDIAN_TEST_VAULT));
 await sw.send('Page.bringToFront'); await sw.sleep(300);
 console.log('settings window title:', await sw.ev(`document.title`));
@@ -179,13 +179,13 @@ await h.send('Page.bringToFront'); await h.ev(`${E}.focus()`); await h.sleep(200
 t = await typed('a'); check('switching back applies at once', t === 'ס', JSON.stringify(t));
 
 // Survives a reload, then an invalid external file
-await h.ev(`(async () => { await app.plugins.disablePlugin('rtl-math-mix'); await app.plugins.enablePlugin('rtl-math-mix'); await new Promise((r) => setTimeout(r, 1500)); })()`);
+await h.ev(`(async () => { await app.plugins.disablePlugin('babel-fish-math'); await app.plugins.enablePlugin('babel-fish-math'); await new Promise((r) => setTimeout(r, 1500)); })()`);
 t = await typed('a'); check('the active map survives a plugin reload', t === 'ס', JSON.stringify(t));
 await h.ev(`${P}.settings.hebrew`);
 await h.ev(`(async () => { await ${AD}.write(${DIR} + 'bad.json', '{ nope'); await ${AD}.write(${DIR} + 'dvorak-test.json', '{ broken'); })()`);
 await h.ev(`app.setting.close && 0`);
 await sw.send('Page.bringToFront'); await sw.sleep(200);
-await h.ev(`app.setting.openTabById('rtl-math-mix')`); await sw.sleep(500);
+await h.ev(`app.setting.openTabById('babel-fish-math')`); await sw.sleep(500);
 await clearN();
 console.log('Reload:', await clickBtn('Manage key maps', 'Reload')); await sw.sleep(600);
 const n2 = await notices();
@@ -226,7 +226,7 @@ await h.send('Page.bringToFront'); await h.ev(`${E}.focus()`); await h.sleep(200
 t = await typed('a'); check('Reset applies at once', t === 'ש', JSON.stringify(t));
 // Delete the file: comes back on the next load
 await h.ev(`${AD}.remove(${DIR} + 'qwerty.json')`);
-await h.ev(`(async () => { await app.plugins.disablePlugin('rtl-math-mix'); await app.plugins.enablePlugin('rtl-math-mix'); await new Promise((r) => setTimeout(r, 1500)); })()`);
+await h.ev(`(async () => { await app.plugins.disablePlugin('babel-fish-math'); await app.plugins.enablePlugin('babel-fish-math'); await new Promise((r) => setTimeout(r, 1500)); })()`);
 check('a deleted default comes back on load', await exists('qwerty'), '');
 
 // Cleanup
@@ -234,5 +234,5 @@ if (hebrewFile) await h.ev(`${AD}.remove(${DIR} + '${hebrewFile}.json')`);
 await h.ev(`app.setting.close()`); sw.close();
 await h.sleep(100); await h.ev(`1`); await h.sleep(500);
 console.log('errors:', h.logs.filter((l) => /error|exception|TypeError/i.test(l) && !/placeCursorAround|Invalid position/.test(l)).slice(-5).join(' | ') || '(none)');
-console.log('final:', await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach((l) => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); return JSON.stringify(app.plugins.plugins['rtl-math-mix'].settings) + ' files=' + JSON.stringify((await ${AD}.list(${DIR})).files.map((x) => x.split('/').pop())); })()`));
+console.log('final:', await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach((l) => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); return JSON.stringify(app.plugins.plugins['babel-fish-math'].settings) + ' files=' + JSON.stringify((await ${AD}.list(${DIR})).files.map((x) => x.split('/').pop())); })()`));
 h.close();

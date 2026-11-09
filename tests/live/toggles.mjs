@@ -16,23 +16,23 @@ await h.ev(`app.plugins.enablePlugin('vim-motions')`); await h.sleep(3500); awai
 await visualOK('J12 Vim Motions off/on → visual motions back');
 
 // math-dir off
-await h.ev(`app.plugins.disablePlugin('rtl-math-mix')`); await h.sleep(1000); await reopen();
+await h.ev(`app.plugins.disablePlugin('babel-fish-math')`); await h.sleep(1000); await reopen();
 await h.doc(HEB, 0, 2); await h.keys('h'); let s = await h.st();
 check('J12 math-dir off → h logical', s.ch === 1, `ch=${s.ch}`);
 await h.doc('\n', 0, 0); await h.keys('iakuo'); await h.key('Escape'); s = await h.st();
 const d = await (async () => { await h.doc(HEB, 0, 0); return dirNow(); })();
 check('J12 math-dir off → no Hebrew typing, no RTL', line0(s) === 'akuo' && d === 'ltr', `typed=${line0(s)} dir=${d}`);
-await h.ev(`app.plugins.enablePlugin('rtl-math-mix')`); await h.sleep(3500); await reopen();
+await h.ev(`app.plugins.enablePlugin('babel-fish-math')`); await h.sleep(3500); await reopen();
 await visualOK('J12 math-dir on again → visual motions');
 await h.doc('\n', 0, 0); await h.keys('iakuo'); await h.key('Escape'); s = await h.st();
 await h.doc(HEB, 0, 0);
 check('J12 math-dir on again → Hebrew typing + RTL', line0(s) === 'שלום' && (await dirNow()) === 'rtl', `typed=${line0(s)}`);
 
 // Visual h/l setting
-await h.ev(`app.plugins.plugins['rtl-math-mix'].settings.visualMotions = false`); await h.sleep(2600);
+await h.ev(`app.plugins.plugins['babel-fish-math'].settings.visualMotions = false`); await h.sleep(2600);
 await h.doc(HEB, 0, 2); await h.keys('h'); s = await h.st();
 check('M6 Visual h/l off → logical within 2 s', s.ch === 1, `ch=${s.ch}`);
-await h.ev(`app.plugins.plugins['rtl-math-mix'].settings.visualMotions = true`); await h.sleep(2600);
+await h.ev(`app.plugins.plugins['babel-fish-math'].settings.visualMotions = true`); await h.sleep(2600);
 await visualOK('M6 Visual h/l on again → visual');
 
 // M1 overlap with hebrew-vim
@@ -53,7 +53,7 @@ await h.key('F12'); await h.sleep(300);
 await h.ev(`app.plugins.disablePlugin('hebrew-vim')`); await h.sleep(2500); await reopen();
 
 // M2 F12 after hebrew-vim is off
-const ind2 = () => h.ev(`[...document.querySelectorAll('.status-bar-item.plugin-rtl-math-mix')].map(e=>e.textContent).join(',')`);
+const ind2 = () => h.ev(`[...document.querySelectorAll('.status-bar-item.plugin-babel-fish-math')].map(e=>e.textContent).join(',')`);
 const i0 = await ind2(); await h.key('F12'); await h.sleep(300); const i1 = await ind2(); await h.key('F12'); await h.sleep(300); const i2 = await ind2();
 check('M2 עב on, F12 toggles and back', i0 === 'עב' && i1 === 'EN' && i2 === 'עב', `${i0} → ${i1} → ${i2}`);
 await h.doc('\n', 0, 0); await h.keys('iakuo'); await h.key('Escape'); s = await h.st();

@@ -8,7 +8,7 @@ await c0.ev(`(async () => { const w = require('@electron/remote')?.getCurrentWin
 await c0.send('Page.bringToFront');
 c0.close();
 const h = await setup();
-const P = `app.plugins.plugins['rtl-math-mix']`;
+const P = `app.plugins.plugins['babel-fish-math']`;
 const E = `app.workspace.activeLeaf.view.editor`;
 const where = async () => JSON.parse(await h.ev(whereExpr));
 const K = async (k, w = 450) => { await h.key(k); await h.sleep(w); };
@@ -16,7 +16,7 @@ const fresh = async () => {
   await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); const l = app.workspace.activeLeaf; await l.setViewState({ type: 'empty' }); await l.openFile(f, { state: { mode: 'source', source: false } }); app.workspace.setActiveLeaf(l, { focus: true }); })()`);
   await h.sleep(500);
 };
-console.log(await h.ev(`(async () => { await app.plugins.disablePlugin('rtl-math-mix'); await app.plugins.enablePlugin('rtl-math-mix'); await new Promise(r => setTimeout(r, 2000)); return 'reloaded; lastKeyAt fn=' + (typeof ${P}.onKeyDown) + '; nativeMenus=' + app.vault.getConfig('nativeMenus') + '; spellcheck=' + app.vault.getConfig('spellcheck'); })()`));
+console.log(await h.ev(`(async () => { await app.plugins.disablePlugin('babel-fish-math'); await app.plugins.enablePlugin('babel-fish-math'); await new Promise(r => setTimeout(r, 2000)); return 'reloaded; lastKeyAt fn=' + (typeof ${P}.onKeyDown) + '; nativeMenus=' + app.vault.getConfig('nativeMenus') + '; spellcheck=' + app.vault.getConfig('spellcheck'); })()`));
 
 const HE = 'intro\n\n| שלום | עולם |\n| --- | --- |\n| ככ | דד |\n\nשלום\n';
 const dollar = async () => { await h.key('$', { code: 'Digit4', vk: 52, shift: true }); await h.sleep(450); };
@@ -79,9 +79,9 @@ for (const how of ['keyboard', 'mouse']) {
 }
 await h.key('Escape'); await h.ev(`${P}.settings.hebrew = false`);
 
-await h.ev(`app.plugins.disablePlugin('rtl-math-mix')`); await h.sleep(800);
+await h.ev(`app.plugins.disablePlugin('babel-fish-math')`); await h.sleep(800);
 await L1('off');
-await h.ev(`app.plugins.enablePlugin('rtl-math-mix')`); await h.sleep(1500);
+await h.ev(`app.plugins.enablePlugin('babel-fish-math')`); await h.sleep(1500);
 await fresh();
 console.log('console errors:', h.logs.filter(l => /error|exception/i.test(l)).slice(-5).join('\n') || '(none)');
 console.log(await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach(l => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); return 'cleaned; active=' + app.workspace.getActiveFile()?.path + '; hebrew=' + ${P}.settings.hebrew + '; ver=' + ${P}.manifest.version; })()`));

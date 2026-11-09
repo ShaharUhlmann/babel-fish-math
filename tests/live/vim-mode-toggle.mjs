@@ -1,7 +1,7 @@
 // Vim mode toggle, live, with Vim Motions on.
 const { setup, check, FILE } = await import('./lib.mjs');
 const h = await setup();
-const P = `app.plugins.plugins['rtl-math-mix']`;
+const P = `app.plugins.plugins['babel-fish-math']`;
 const E = `app.workspace.activeLeaf.view.editor`;
 const K = async (k, w = 200) => { await h.key(k); await h.sleep(w); };
 const set = async (on) => { await h.ev(`(async () => { ${P}.settings.vimMode = ${on}; await ${P}.saveSettings(); ${P}.applyVimMode(); })()`); await h.sleep(500); };

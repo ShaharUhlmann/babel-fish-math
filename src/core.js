@@ -1,4 +1,4 @@
-// RTL Math Mix: the core. v0.9.0
+// Any Language Math (BabelFish): the core. v0.9.0
 //
 // Hebrew notes with math: notes with Hebrew are RTL while math, code and
 // frontmatter stay LTR, with a LyX-style Hebrew typing layer and the keyboard left
@@ -238,7 +238,7 @@ function stepLine(s, line, fast, sink) {
   return s;
 }
 
-// Per-keystroke work counters, read live as app.plugins.plugins['rtl-math-mix'].perf
+// Per-keystroke work counters, read live as app.plugins.plugins['babel-fish-math'].perf
 // (reset with perfReset()). Always on: a few integer increments and two clock
 // reads per editor update.
 const perf = {
@@ -1047,7 +1047,7 @@ class KeyMaps {
       parts.push(`Key map "${this.plugin.settings.activeMap}" isn't available, so the built-in original is in use.`);
     }
     if (!parts.length) return true;
-    new Notice('RTL Math Mix: ' + parts.join(' '), 15000);
+    new Notice('Any Language Math (BabelFish): ' + parts.join(' '), 15000);
     return false;
   }
 
@@ -1541,7 +1541,7 @@ class HebrewMathSettingTab extends PluginSettingTab {
       try {
         await action();
       } catch (err) {
-        new Notice('RTL Math Mix: the key map action failed: ' + (err.message || err));
+        new Notice('Any Language Math (BabelFish): the key map action failed: ' + (err.message || err));
       }
       this.display();
     };
@@ -1618,7 +1618,7 @@ module.exports = class HebrewMathPlugin extends Plugin {
     await this.keyMaps.load();
 
     // Shared helpers, for other plugins and the Console:
-    // app.plugins.plugins['rtl-math-mix'].api
+    // app.plugins.plugins['babel-fish-math'].api
     this.api = {
       docDirection, scanLine, inlineClose, frontmatterEnd,
       regionsFor, textRegions, contextAt, inMathOrCode, translate, features,
@@ -1703,8 +1703,8 @@ module.exports = class HebrewMathPlugin extends Plugin {
         try {
           if (handler(view, from, to, out, defaultInsert)) return true;
         } catch (err) {
-          if (typeof logException === 'function') logException(view.state, err, 'rtl-math-mix: input handler');
-          else console.error('rtl-math-mix: input handler failed', err);
+          if (typeof logException === 'function') logException(view.state, err, 'babel-fish-math: input handler');
+          else console.error('babel-fish-math: input handler failed', err);
           return true;
         }
       }
@@ -1915,7 +1915,7 @@ module.exports = class HebrewMathPlugin extends Plugin {
         r.pending = !r.editor;
       }
     } catch (e) {
-      console.error('rtl-math-mix: self-check failed to run', e);
+      console.error('babel-fish-math: self-check failed to run', e);
       return null;
     }
     this.probe = r;
@@ -1934,9 +1934,9 @@ module.exports = class HebrewMathPlugin extends Plugin {
     const fresh = off.filter((k) => !this.notified.has(k));
     if (fresh.length) {
       for (const k of fresh) this.notified.add(k);
-      new Notice('RTL Math Mix: a self-check failed, so this is off: ' +
+      new Notice('Any Language Math (BabelFish): a self-check failed, so this is off: ' +
         off.map((k) => texts[k]).join('; ') + '. Details: Settings → Diagnostics.', 15000);
-      console.warn('rtl-math-mix: self-check turned off: ' + off.join(', '), r);
+      console.warn('babel-fish-math: self-check turned off: ' + off.join(', '), r);
     }
     return r;
   }
@@ -1954,7 +1954,7 @@ module.exports = class HebrewMathPlugin extends Plugin {
     for (const k of Object.keys(features)) rows.push({ check: 'feature ' + k, result: features[k] === false ? 'OFF' : features[k] === true ? 'on' : 'on (unchecked)', feature: '' });
     console.table(rows);
     const off = Object.keys(features).filter((k) => features[k] === false);
-    new Notice('RTL Math Mix diagnostics: ' + (vim ? vim.loadedText(r) : 'Vim mode off') + '. ' +
+    new Notice('Any Language Math (BabelFish) diagnostics: ' + (vim ? vim.loadedText(r) : 'Vim mode off') + '. ' +
       (off.length ? 'Off: ' + off.join(', ') + '.' : 'All features on.') +
       (this.probePending ? ' Open a note for the editor checks.' : '') + ' Table in the Console.', 10000);
     return rows;
@@ -2102,7 +2102,7 @@ module.exports = class HebrewMathPlugin extends Plugin {
     }
     this.app.vault.cachedRead(file)
       .then((text) => this.applySection(el, this.dirFor(text), ctx.docId))
-      .catch((err) => console.warn('rtl-math-mix: could not read ' + file.path + ' to set its direction', err));
+      .catch((err) => console.warn('babel-fish-math: could not read ' + file.path + ' to set its direction', err));
   }
 
   // The text of `file` as an open editor holds it, or null. Public API only:
@@ -2123,7 +2123,7 @@ module.exports = class HebrewMathPlugin extends Plugin {
         }
       }
     } catch (err) {
-      console.warn('rtl-math-mix: could not read the open editor', err);
+      console.warn('babel-fish-math: could not read the open editor', err);
     }
     return null;
   }

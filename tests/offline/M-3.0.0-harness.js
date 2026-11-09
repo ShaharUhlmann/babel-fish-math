@@ -34,7 +34,7 @@ const { EditorView } = CMview;
 const mainFile = path.resolve(process.argv[2]);
 const pluginDir = path.dirname(mainFile);
 const buildFile = path.join(pluginDir, 'build.mjs');
-const DIR = '.obsidian/plugins/rtl-math-mix';
+const DIR = '.obsidian/plugins/babel-fish-math';
 const MAPS = DIR + '/maps';
 
 // What 2.8.0 had in EN2HE, written out on purpose: the file must not drift from it.

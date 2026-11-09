@@ -1,7 +1,7 @@
 // R then Backspace on built-in Vim: is it the plugin?
 const { setup, FILE } = await import('./lib.mjs');
 const h = await setup();
-const P = `app.plugins.plugins['rtl-math-mix']`;
+const P = `app.plugins.plugins['babel-fish-math']`;
 const K = async (k, w = 200) => { await h.key(k); await h.sleep(w); };
 const run = async (label, doc, a, b) => {
   await h.doc(doc, 0, 0); await K('R'); await K(a); await K(b);
@@ -13,8 +13,8 @@ const run = async (label, doc, a, b) => {
 await run('math-dir on, layer on, Hebrew', 'אבגד\n', 'a', 'k');
 await h.ev(`${P}.settings.hebrew = false`);
 await run('math-dir on, layer off, English', 'abcd\n', 'x', 'y');
-await h.ev(`app.plugins.disablePlugin('rtl-math-mix')`); await h.sleep(800);
+await h.ev(`app.plugins.disablePlugin('babel-fish-math')`); await h.sleep(800);
 await run('math-dir disabled, English', 'abcd\n', 'x', 'y');
-await h.ev(`app.plugins.enablePlugin('rtl-math-mix')`); await h.sleep(1500);
+await h.ev(`app.plugins.enablePlugin('babel-fish-math')`); await h.sleep(1500);
 await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach((l) => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); })()`);
 h.close();

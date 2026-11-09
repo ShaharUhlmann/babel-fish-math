@@ -1,6 +1,6 @@
 {
-  "id": "rtl-math-mix",
-  "name": "RTL Math Mix",
+  "id": "babel-fish-math",
+  "name": "Any Language Math (BabelFish)",
   "version": "0.9.0",
   "minAppVersion": "1.5.0",
   "description": "Write Hebrew notes with math: notes are right-to-left while math, code and frontmatter stay left-to-right. Includes a Hebrew typing layer and optional Vim support.",

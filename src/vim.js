@@ -1,4 +1,4 @@
-// RTL Math Mix: the Vim integration (v0.9.0). Runs only while the
+// Any Language Math (BabelFish): the Vim integration (v0.9.0). Runs only while the
 // "Vim mode" setting is on, as one VimIntegration object (section V6), which is all
 // the core talks to. At load this file only declares things and builds key tables.
 //
@@ -312,7 +312,7 @@ function feedKey(view, key) {
     : V.handleKey(cm, key, 'user');
   const signal = cm.constructor && cm.constructor.signal;
   if (handled && typeof signal === 'function') {
-    try { signal(cm, 'vim-keypress', key); } catch (err) { console.error('rtl-math-mix: signal failed', err); }
+    try { signal(cm, 'vim-keypress', key); } catch (err) { console.error('babel-fish-math: signal failed', err); }
   }
   return !!handled;
 }
@@ -571,7 +571,7 @@ function relabel(e, key) {
     Object.defineProperty(e, 'key', { value: key, configurable: true });
     return e.key === key;
   } catch (err) {
-    console.error('rtl-math-mix: could not relabel the key', err);
+    console.error('babel-fish-math: could not relabel the key', err);
     return false;
   }
 }
@@ -787,7 +787,7 @@ class VimIntegration {
   stop() {
     const V = vimApi();
     if (V && V === this.V && on('motions')) {
-      try { defineVimMotions(V, false); } catch (e) { console.error('rtl-math-mix: could not reset the Vim motions', e); }
+      try { defineVimMotions(V, false); } catch (e) { console.error('babel-fish-math: could not reset the Vim motions', e); }
     }
     this.V = null;
     this.vimVisual = null;
@@ -847,7 +847,7 @@ class VimIntegration {
         }
       }
     } catch (e) {
-      console.error('rtl-math-mix: could not register the Vim motions', e);
+      console.error('babel-fish-math: could not register the Vim motions', e);
     }
   }
 

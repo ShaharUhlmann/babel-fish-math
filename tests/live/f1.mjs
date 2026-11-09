@@ -1,6 +1,6 @@
 import { setup, check, FILE } from './lib.mjs';
 const h0 = await setup();
-console.log(await h0.ev(`(async () => { await app.plugins.disablePlugin('rtl-math-mix'); await app.plugins.enablePlugin('rtl-math-mix'); await new Promise(r => setTimeout(r, 2500)); return 'reloaded; has relabel: ' + String(app.plugins.plugins['rtl-math-mix'].constructor.toString().length) + ' hebrew=' + app.plugins.plugins['rtl-math-mix'].settings.hebrew; })()`));
+console.log(await h0.ev(`(async () => { await app.plugins.disablePlugin('babel-fish-math'); await app.plugins.enablePlugin('babel-fish-math'); await new Promise(r => setTimeout(r, 2500)); return 'reloaded; has relabel: ' + String(app.plugins.plugins['babel-fish-math'].constructor.toString().length) + ' hebrew=' + app.plugins.plugins['babel-fish-math'].settings.hebrew; })()`));
 h0.close();
 const h = await setup();
 const E = `app.workspace.activeLeaf.view.editor`;
@@ -91,5 +91,5 @@ check('8 Ex modal: OS-Hebrew KeyW → w, layer-on w → w', v1 === 'w' && v2 ===
 await h.key('Escape', { wait: 300 });
 
 console.log('\nconsole:\n' + (h.logs.join('\n') || '(none)'));
-console.log(await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach(l => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); return 'cleaned; hebrew=' + app.plugins.plugins['rtl-math-mix'].settings.hebrew; })()`));
+console.log(await h.ev(`(async () => { const f = app.vault.getAbstractFileByPath('${FILE}'); app.workspace.getLeavesOfType('markdown').forEach(l => { if (l.view.file === f) l.detach(); }); if (f) await app.vault.delete(f); return 'cleaned; hebrew=' + app.plugins.plugins['babel-fish-math'].settings.hebrew; })()`));
 h.close();

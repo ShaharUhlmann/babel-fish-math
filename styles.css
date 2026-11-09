@@ -1,4 +1,4 @@
-/* RTL Math Mix: the only source of text direction in the editor.
+/* Any Language Math (BabelFish): the only source of text direction in the editor.
    The line classes back up the dir attribute, so the result doesn't depend on
    which line decoration CodeMirror applies last. */
 

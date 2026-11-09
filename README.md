@@ -1,8 +1,8 @@
-# RTL Math Mix
+# Any Language Math (BabelFish)
 
 An Obsidian plugin for writing Hebrew notes with math. Notes read right to left, while math, code and frontmatter stay left to right, so formulas stay readable inside Hebrew sentences. It also lets you type Hebrew with your keyboard left on English, and has optional Vim support.
 
-It's desktop only, and Hebrew only for now: other right-to-left scripts, such as Arabic, aren't detected.
+It's desktop only. It's built for Hebrew so far: other languages can be typed with a key map, but other right-to-left scripts, such as Arabic, don't yet make a note RTL on their own.
 
 ## What it does
 
@@ -19,9 +19,9 @@ No other plugins are needed. Direction and typing work without any Vim.
 
 The plugin isn't in Obsidian's community plugins yet, so install it by hand:
 
-1. Create the folder `.obsidian/plugins/rtl-math-mix/` in your vault.
+1. Create the folder `.obsidian/plugins/babel-fish-math/` in your vault.
 2. Put `main.js`, `manifest.json` and `styles.css` in it, from a release. To build `main.js` yourself, see Development.
-3. Under **Settings → Community plugins**, turn off Restricted mode if it's on, then enable **RTL Math Mix**.
+3. Under **Settings → Community plugins**, turn off Restricted mode if it's on, then enable **Any Language Math (BabelFish)**.
 4. Turn off Obsidian's own **Right-to-left** editor setting and any other RTL plugins, since they also set direction.
 
 ## Good to know
@@ -44,7 +44,7 @@ The plugin isn't in Obsidian's community plugins yet, so install it by hand:
 
 ## Key maps
 
-Maps are JSON files in `.obsidian/plugins/rtl-math-mix/maps/`, which the plugin creates:
+Maps are JSON files in `.obsidian/plugins/babel-fish-math/maps/`, which the plugin creates:
 
 ```json
 { "name": "QWERTY → Hebrew (SI-1452)", "keys": { "q": "/", "w": "'" } }
@@ -65,7 +65,7 @@ An invalid file is skipped with a notice and never overwritten. If the current m
 
 `src/core.js` is the plugin, `src/vim.js` holds everything for Vim, and `src/default-map.json` is the original key map. `main.js` is generated and isn't in git: `node build.mjs` joins them into it, with no dependencies, and fails if the core mentions a Vim internal or a name from `vim.js` other than `VimIntegration`. `node build.mjs --check` tells you whether `main.js` is up to date.
 
-To work on it, make this repo the folder `.obsidian/plugins/rtl-math-mix/` of a test vault. `npm install` and `npm test` run the offline tests. `tests/README.md` covers those and the live ones, and `docs/documentation.md` has the architecture, the rules for math and code, and known limits.
+To work on it, make this repo the folder `.obsidian/plugins/babel-fish-math/` of a test vault. `npm install` and `npm test` run the offline tests. `tests/README.md` covers those and the live ones, and `docs/documentation.md` has the architecture, the rules for math and code, and known limits.
 
 ## License
 

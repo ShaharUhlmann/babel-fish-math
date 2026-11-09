@@ -6,9 +6,9 @@ tags:
   - vim
   - hebrew
 ---
-# RTL Math Mix documentation
+# Any Language Math (BabelFish) documentation
 
-**RTL Math Mix** 0.9.0, called "Hebrew Vim + Math Direction" and `math-dir` until then. Plugin id `rtl-math-mix`. The plugin lives in `.obsidian/plugins/rtl-math-mix/`: `src/core.js` (2161 lines), `src/vim.js` (1046 lines), `src/default-map.json`, `build.mjs`, the generated `main.js` (3250 lines), `styles.css`, `manifest.json`, `data.json`, `README.md`, and `maps/`, which the plugin creates. Edit `src/`, then run `node build.mjs`. The previous versions are backed up in `Snippets/_backups/math-dir-2.8.0/`, `math-dir-2.7.1/`, `math-dir-2.7.0/`, `math-dir-2.6.0/`, `math-dir-2.5.0/`, `math-dir-2.4.0/`, `math-dir-2.3.0/`, `math-dir-2.2.0/`, `math-dir-2.1.0/` and `math-dir-2.0.1/` (each with its `data.json`).
+**Any Language Math (BabelFish)** 0.9.0, called "Hebrew Vim + Math Direction" and `math-dir` until then. Plugin id `babel-fish-math`. The plugin lives in `.obsidian/plugins/babel-fish-math/`: `src/core.js` (2161 lines), `src/vim.js` (1046 lines), `src/default-map.json`, `build.mjs`, the generated `main.js` (3250 lines), `styles.css`, `manifest.json`, `data.json`, `README.md`, and `maps/`, which the plugin creates. Edit `src/`, then run `node build.mjs`. The previous versions are backed up in `Snippets/_backups/math-dir-2.8.0/`, `math-dir-2.7.1/`, `math-dir-2.7.0/`, `math-dir-2.6.0/`, `math-dir-2.5.0/`, `math-dir-2.4.0/`, `math-dir-2.3.0/`, `math-dir-2.2.0/`, `math-dir-2.1.0/` and `math-dir-2.0.1/` (each with its `data.json`).
 
 **0.9.0 (2026-11-09)** is internal build 3.0.0 renumbered for testing outside this vault, with no code change. Unpublished so far. Versions below 0.9.0 in this note, 1.x to 3.0.0, are the private build history and keep their numbers.
 

@@ -1,9 +1,9 @@
 import { setup, check, FILE } from './lib.mjs';
 const h0 = await setup();
-console.log(await h0.ev(`(async () => { await app.plugins.disablePlugin('rtl-math-mix'); await app.plugins.enablePlugin('rtl-math-mix'); await new Promise(r => setTimeout(r, 2500)); const p = app.plugins.plugins['rtl-math-mix']; return 'reloaded: ' + (p ? 'loaded, hebrew=' + p.settings.hebrew : 'NOT LOADED'); })()`));
+console.log(await h0.ev(`(async () => { await app.plugins.disablePlugin('babel-fish-math'); await app.plugins.enablePlugin('babel-fish-math'); await new Promise(r => setTimeout(r, 2500)); const p = app.plugins.plugins['babel-fish-math']; return 'reloaded: ' + (p ? 'loaded, hebrew=' + p.settings.hebrew : 'NOT LOADED'); })()`));
 h0.close();
 const h = await setup();
-const P = `app.plugins.plugins['rtl-math-mix']`;
+const P = `app.plugins.plugins['babel-fish-math']`;
 const notices = () => h.ev(`[...document.querySelectorAll('.notice')].map(n=>n.textContent).join(' | ')`);
 const clearN = () => h.ev(`document.querySelectorAll('.notice').forEach(n=>n.remove())`);
 let s, n;
@@ -57,11 +57,11 @@ await h.doc('\n', 0, 0); await h.key('i'); await h.key('ש', { code: 'KeyA', vk:
 check('L9 warning still shows in the note', /keyboard/i.test(n), n.slice(0, 60));
 
 // L14 settings toggle refresh (open settings tab, press F12 via command)
-await h.ev(`(async () => { app.setting.open(); app.setting.openTabById('rtl-math-mix'); })()`); await h.sleep(600);
+await h.ev(`(async () => { app.setting.open(); app.setting.openTabById('babel-fish-math'); })()`); await h.sleep(600);
 const tog0 = await h.ev(`[...document.querySelectorAll('.modal.mod-settings .checkbox-container')][0]?.classList.contains('is-enabled')`);
-await h.ev(`app.commands.executeCommandById('rtl-math-mix:toggle-hebrew-typing')`); await h.sleep(300);
+await h.ev(`app.commands.executeCommandById('babel-fish-math:toggle-hebrew-typing')`); await h.sleep(300);
 const tog1 = await h.ev(`[...document.querySelectorAll('.modal.mod-settings .checkbox-container')][0]?.classList.contains('is-enabled')`);
-await h.ev(`app.commands.executeCommandById('rtl-math-mix:toggle-hebrew-typing')`); await h.sleep(200);
+await h.ev(`app.commands.executeCommandById('babel-fish-math:toggle-hebrew-typing')`); await h.sleep(200);
 await h.ev(`app.setting.close()`); await h.sleep(300);
 check('L14 settings toggle follows F12', tog0 === true && tog1 === false, `${tog0} → ${tog1}`);
 

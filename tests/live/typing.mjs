@@ -61,11 +61,11 @@ let n = await notices(); check('B16 Windows-Hebrew typing → layout warning', n
 await clearNotices(); await h.sleep(5200);
 await h.doc('\n', 0, 0); await h.keys('iakuo'); await h.key('Escape'); await h.sleep(200);
 n = await notices(); check('B16 Windows-English typing → no warning', n === '', n.slice(0, 80));
-await h.ev(`app.plugins.plugins['rtl-math-mix'].settings.layoutWarning = false`);
+await h.ev(`app.plugins.plugins['babel-fish-math'].settings.layoutWarning = false`);
 await clearNotices(); await h.sleep(5200);
 await h.doc('\n', 0, 0); await h.key('i'); await hebPhys('a'); await h.key('Escape'); await h.sleep(200);
 n = await notices(); check('M3 layout warning off → silent', n === '', n.slice(0, 80));
-await h.ev(`app.plugins.plugins['rtl-math-mix'].settings.layoutWarning = true`);
+await h.ev(`app.plugins.plugins['babel-fish-math'].settings.layoutWarning = true`);
 
 // M7 indented code types English
 await h.doc('שלום\n\n    code\n', 2, 8); await h.key('a'); await h.keys('akuo'); await h.key('Escape'); s = await h.st();
