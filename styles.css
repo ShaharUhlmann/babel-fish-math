@@ -1,0 +1,114 @@
+/* RTL Math Mix: the only source of text direction in the editor.
+   The line classes back up the dir attribute, so the result doesn't depend on
+   which line decoration CodeMirror applies last. */
+
+/* ---- Editor (Live Preview and Source mode) ---- */
+
+.cm-editor .cm-line.math-dir-line-rtl {
+  direction: rtl;
+}
+
+.cm-editor .cm-line.math-dir-line-ltr {
+  direction: ltr;
+}
+
+/* Inline math source, delimiters included. */
+.cm-editor .math-dir-iso {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Vim Motions' block cursor (.cm-vimCursorLayer) draws a copy of the character
+   under it. Give it the direction of the text at the cursor, so < > ( ) are
+   not mirrored inside math in a Hebrew note. The math-dir-cur-* class exists
+   only while Vim mode is on (src/vim.js). */
+.cm-editor.math-dir-cur-ltr .cm-vimCursorLayer {
+  direction: ltr;
+}
+
+.cm-editor.math-dir-cur-rtl .cm-vimCursorLayer {
+  direction: rtl;
+}
+
+/* Properties (frontmatter) stay LTR in a Hebrew note. */
+.cm-editor.math-dir-rtl .metadata-container {
+  direction: ltr;
+}
+
+/* ---- Key map modals (the settings tab) ---- */
+
+.math-dir-map-name {
+  width: 100%;
+}
+
+.math-dir-map-text {
+  display: block;
+  width: 100%;
+  height: 50vh;
+  font-family: var(--font-monospace);
+  direction: ltr;
+  resize: vertical;
+}
+
+.math-dir-map-error {
+  color: var(--text-error);
+}
+
+/* ---- Reading view: one class per rendered section ----
+   Obsidian sets dir="auto" on p / li / headings and unicode-bidi: plaintext on
+   p, which would let an English-first paragraph go LTR. */
+
+.markdown-rendered .math-dir-rtl,
+.markdown-rendered .math-dir-rtl :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, .callout-title, td, th) {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.markdown-rendered .math-dir-ltr,
+.markdown-rendered .math-dir-ltr :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, .callout-title, td, th) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Code blocks stay LTR. Rendered math is at the end of this file. */
+.markdown-rendered .math-dir-rtl pre {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+/* The note's direction, held by the section container: Reading view detaches
+   sections far from the viewport, so one can come back still stamped with an
+   old direction. These beat the per-section rules above. `to` keeps an embed's
+   sections out of its host's rules: an embed has its own sizer and direction. */
+@scope (.markdown-preview-sizer[data-math-dir="rtl"]) to (.markdown-preview-sizer) {
+  :scope[data-math-dir] > :is(.math-dir-rtl, .math-dir-ltr),
+  :scope[data-math-dir] > :is(.math-dir-rtl, .math-dir-ltr) :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, .callout-title, td, th) {
+    direction: rtl;
+    unicode-bidi: isolate;
+  }
+
+  :scope[data-math-dir] > :is(.math-dir-rtl, .math-dir-ltr) pre {
+    direction: ltr;
+    unicode-bidi: isolate;
+    text-align: left;
+  }
+}
+
+@scope (.markdown-preview-sizer[data-math-dir="ltr"]) to (.markdown-preview-sizer) {
+  :scope[data-math-dir] > :is(.math-dir-rtl, .math-dir-ltr),
+  :scope[data-math-dir] > :is(.math-dir-rtl, .math-dir-ltr) :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, .callout-title, td, th) {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+}
+
+/* Rendered math reads left to right inside Hebrew text, in Reading view and in
+   Live Preview widgets. */
+.math,
+.math-inline,
+.math-block,
+mjx-container {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}

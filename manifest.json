@@ -1,0 +1,10 @@
+{
+  "id": "rtl-math-mix",
+  "name": "RTL Math Mix",
+  "version": "0.9.0",
+  "minAppVersion": "1.5.0",
+  "description": "Write Hebrew notes with math: notes are right-to-left while math, code and frontmatter stay left-to-right. Includes a Hebrew typing layer and optional Vim support.",
+  "author": "Shahar Uhlmann",
+  "authorUrl": "https://github.com/ShaharUhlmann",
+  "isDesktopOnly": true
+}
